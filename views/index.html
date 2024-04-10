@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <script>
+        // add price button
+        function addPrice() {
+            var form = document.querySelector("form");
+            var newDiv = document.createElement("div");
+            var label = document.createElement("label");
+            label.textContent = "Price";
+
+            var input = document.createElement("input");
+            input.type = "number";
+            input.step = "0.01";
+            input.name = "price";
+            input.min = "0.01";
+
+            var deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.textContent = "-";
+
+            deleteButton.onclick = function() {
+                this.parentNode.remove();
+            };
+
+            newDiv.appendChild(label);
+            newDiv.appendChild(input);
+            newDiv.appendChild(deleteButton);
+
+            form.insertBefore(newDiv, form.children[form.children.length - 3]);
+        }
+
+    </script>
+</head>
+
+<body>
+    <form action="">
+        <!--price-->
+        <div>
+            <label for="Price">Price</label>
+            <input type="number" step="0.01" id="price" name="price" min="0.01">
+            <button type="button" onclick="addPrice()">+</button>
+        </div>
+        <!--state-->
+        <div>
+            <label for="State">State</label>
+            <select name="State" id="State">
+                <option value="state 1">California</option>
+                <option value="state 2">Texas</option>
+                <option value="state 3"></option>
+                <option value="state 4">state 4</option>
+                <option value="state 5">state 5</option>
+            </select>
+        </div>
+        <!--discount-->
+        <div>
+            <label for="Discount">Discount</label>
+            <select name="Discount" id="Discount">
+                <option value="Discount 0">Discount 0%</option>
+                <option value="Discount 5">Discount 5%</option>
+                <option value="Discount 10">Discount 10%</option>
+                <option value="Discount 15">Discount 15%</option>
+                <option value="Discount 20">Discount 20%</option>
+            </select>
+        </div>
+        <!--calculate-->
+        <div>
+            <input type="submit" value="Calculate">
+        </div>
+    </form>
+</body>
+
+</html>
