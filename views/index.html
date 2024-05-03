@@ -34,6 +34,14 @@
             form.insertBefore(newDiv, form.children[form.children.length - 3]);
         }
 
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const sum = params.get('sum');
+            if (sum) {
+                document.getElementById('resultDisplay').textContent = sum;
+            }
+        };
+
     </script>
 </head>
 
@@ -72,6 +80,10 @@
             <input type="submit" value="Calculate">
         </div>
     </form>
+    <div>
+        <label>Result: </label>
+        <span id="resultDisplay"></span>
+    </div>
 </body>
 
 </html>

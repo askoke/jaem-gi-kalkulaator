@@ -13,17 +13,17 @@ app.use(express.urlencoded({ extended: true }))
 let sum
 
 app.get('/', (req, res) => {
-    res.render('./index.html', {
-      sum: sum
+    res.sendFile(path.join(__dirname, 'views', 'index.html'), {
+      sum: req.query.sum
     })
   })
 
 app.post('/', (req, res) => {
   console.log(req.body.State)
 
-  const price = req.body.price
-  const state = req.body.State
-  const pre_discount = req.body.Discount
+  const price = parseFloat(req.body.price);
+  const state = req.body.State;
+  const pre_discount = parseInt(req.body.Discount);
 
   let state_tax
 
@@ -57,6 +57,8 @@ app.post('/', (req, res) => {
   console.log(full_price)
   console.log(state_tax)
   console.log(state)
+
+  res.redirect(`/?sum=${sum}`)
 }) 
 
 app.listen(3040, () => {
