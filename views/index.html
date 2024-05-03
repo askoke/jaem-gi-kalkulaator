@@ -8,33 +8,18 @@
     <script>
         // add price button
         function addPrice() {
-            let form = document.querySelector("form");
-            let newDiv = document.createElement("div");
-            let label = document.createElement("label");
-            label.textContent = "Price";
-
-            let input = document.createElement("input");
-            input.type = "number";
-            input.step = "0.01";
-            input.name = "price";
-            input.min = "0.01";
-
-            let deleteButton = document.createElement("button");
-            deleteButton.type = "button";
-            deleteButton.textContent = "-";
-
-            deleteButton.onclick = function() {
-                this.parentNode.remove();
-            };
-
-            newDiv.appendChild(label);
-            newDiv.appendChild(input);
-            newDiv.appendChild(deleteButton);
-
-            form.insertBefore(newDiv, form.children[form.children.length - 3]);
+            let priceInputs = document.getElementById('priceInputs');
+            let newDiv = document.createElement('div');
+            newDiv.innerHTML = '<label>Price:</label><input type="number" step="0.01" name="price[]" required min="0.01"><button type="button" onclick="removePrice(this)">-</button>';
+            priceInputs.appendChild(newDiv);
         }
 
-        window.onload = function() {
+        // remove the line
+        function removePrice(button) {
+            button.parentNode.remove();
+        }
+
+        window.onload = function () {
             const params = new URLSearchParams(window.location.search);
             const sum = params.get('sum');
             if (sum) {
@@ -46,12 +31,14 @@
 </head>
 
 <body>
-    <form action="/" method="POST" >
+    <form action="/" method="POST">
         <!--price-->
-        <div>
-            <label for="Price">Price</label>
-            <input type="number" step="0.01" id="price" name="price" min="0.01">
-            <button type="button" onclick="addPrice()">+</button>
+        <div id="priceInputs">
+            <div>
+                <label for="Price">Price</label>
+                <input type="number" step="0.01" name="price[]" required min="0.01">
+                <button type="button" onclick="addPrice()">+</button>
+            </div>
         </div>
         <!--state-->
         <div>
@@ -70,7 +57,7 @@
             <select name="Discount" id="Discount">
                 <option value=0>0%</option>
                 <option value=5>5%</option>
-                <option value=10>0%</option>
+                <option value=10>10%</option>
                 <option value=15>15%</option>
                 <option value=20>20%</option>
             </select>
